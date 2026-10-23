@@ -63,7 +63,7 @@ def get_corr_BTSettl_gr40(bprp, Ak):
     return corr2
     
 def get_corr_BTSettl_gr40_2(bprp, Ak):
-    # Coefficients from table_BTSettl_g4.0_cut10.tex (deg 5, α=3.2e-06)
+    # Coefficients from table_BTSettl_g4.0_cut10.tex 
     corr2 = (
         + 2.808332e-05
         - 3.674620e-03 * bprp
@@ -147,7 +147,7 @@ Ebv          = data2['ebv']
 #Ak = Av*0.077  # Set to 0.0 as in your v2 script
 ak_raw = 3.1 * Ebv * 0.077
 Ak     = np.where(np.isnan(ak_raw), 0.0, ak_raw)      # missing E(B-V): assume A_K = 0 and flag it
-intr   = bprp - 4.86 * Ak                              # reddening-corrected colour
+intr   = bprp - 4.86 * Ak                              # reddening-corrected colour $E(\mathrm{BP}-\mathrm{RP}) / E(B-V) \approx 1.3$–$1.4$.
 
 # 1. Empirical Correction
 corrEmp = get_corr_emp(bprp)+ 0.0031
@@ -161,7 +161,7 @@ corrNext55 = get_corr_Next_gr55(bprp, Ak)+ 0.0031
 # colour validity ranges (BP-RP, mag)
 COLOR_RANGES = {
     'corrEmp': (-1.0,10.0),    
-    'BTSettl40': (-0.5,   10.0),
+    'BTSettl40': (-0.5,   5.0),
     'BTSettl55': ( 1.15, 10.0),
     'Next55':    ( 1.15, 10.0),
     'Next15':    (-0.332, 10.0),
@@ -190,20 +190,6 @@ corrFinal = np.where(bprp < 1.9, c40, mean4055)
 corrFinal = np.where(np.isnan(corrFinal), corrEmp, corrFinal)   # fallback, flag these stars
 data2['corrFinal']=corrFinal
 
-#corr_cols = [ 'corrBTSettl40', 'corrBTSettl55']
-#vals = data2[corr_cols].astype(float)
-#vals = vals.mask(vals > 99)
-#data2['corrBTSettl40-55'] = vals.mean(axis=1)           # NaN-aware, per star
-#data2['corrStd']  = vals.std(axis=1, ddof=1)    # sample sigma across the valid corrections
-#data2['corrN']    = vals.count(axis=1)          # how many corrections went into it
-#data2['corrFinal'] = np.where(
-#   bprp < 1.9,
-#   data2['corrBTSettl40'],      # or the logg=4.0 relation
-#   data2['corrBTSettl40-55']
-#)   
-#data2['corrEmp']= np.minimum(data2['corrEmp'], 0.0)
-#data2['corrNext15']= np.minimum(data2['corrNext15'], 0.0)
-#data2['corrBTSettl40-55']=np.minimum(data2['corrFinal'], 0.0)
 
 
 
