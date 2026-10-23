@@ -10,6 +10,30 @@ CORRECTIONS.py  --- Python script which includes all subroutines
 GaiaXpy.xml     --- file created for the TESSv2cut filter to be used with 
                     GaiaXpy
 
+For your python script, how to call GaiaXpy
+from gaiaxpy import PhotometricSystem, load_additional_systems
+from gaiaxpy import generate
+...
+...
+# ── Photometric systems ───────────────────────────────────────────────────────
+PhotometricSystem.get_available_systems()
+PhotometricSystem = load_additional_systems('....../tess_filter')
+phot_systems_list = [PhotometricSystem.Gaia_DR3_Vega,PhotometricSystem.USER_TESS]
+...
+...
+# Column names of the synthetic magnitudes as returned by gaiaxpy.generate().
+# Inspect one output once if unsure: print(synthetic_photometry.columns.tolist())
+COL_G    = 'GaiaDr3Vega_mag_G'
+COL_BP   = 'GaiaDr3Vega_mag_BP'
+COL_RP   = 'GaiaDr3Vega_mag_RP'
+COL_TESS    = 'USER_TESS_mag_Red_v2'   # adjust if your filter file uses a different band name
+COL_TESS_cut = 'USER_TESS_mag_Red_v2_crop20'   # adjust if your filter file uses a different band name
+...
+...
+...
+synthetic_photometry = generate(f, photometric_system=phot_systems_list,save_file=False)
+
+
 ----------------------------------------------------------------------
 TOI_TESSmag.csv
 
