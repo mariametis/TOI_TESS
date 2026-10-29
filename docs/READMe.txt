@@ -44,8 +44,26 @@ the following columns:
 1-dr3_source_id    ---   Gaia DR3 source_id
 2-ebv              ---   reddening as tabulated in the TOI catalog
 3-dr3BPRP          ---   Observed Gaia DR3 BP-RP color
-4-SyntTESS_cut     ---   Synthetic TESSv2_cut magnitude from Gaia DR3 BP-RP color
+4-SyntTESS_cut     ---   Synthetic TESSv2_cut magnitude from Gaia DR3 BP-RP spectra
 5-SyntTESS_cuterr  ---   Error from GaiaXpy on the synthetic TESSv2_cut magnitude
 6-corrNext15       ---   Correction for the missing tail using NEXTGen gr1.5 models
 7-corrFinal        ---   Correction for the missing tail using BT_SEttl gr4 and gr5.5 models
+
+----------------------------------------------------------------------
+calspec_tess.csv
+
+1-source_id           ---   Gaia DR3 source_id
+2-E_BV                ---   Reddening
+3-RUWE                ---   Gaia DR3 RUWE
+4-phot_variable_flag  ---   Gaia DR3 phot_variable_flag
+5-non_single_star     ---   Gaia DR3 non_single_star
+6-C_star              ---   Gaia DR3 C_star 
+7-dr3BPRP_x           ---   Gaia DR3 dr3BPRP 
+8-hrTESS              ---   Synthetic TESSv2 magnitude from CALSPEC spectra
+9-hrTESScut20         ---   Synthetic TESSv2_cut magnitude from CALSPEC spectra
+10-SyntTESS_cut       ---   Synthetic TESSv2_cut magnitude from Gaia DR3 BP-RP spectra
+11-SyntTESS_cuterr    ---   Error from GaiaXpy on the synthetic TESSv2_cut magnitude
+12-corrNext15         ---   Correction for the missing tail using NEXTGen gr1.5 models
+13-corrFinal          ---   Correction for the missing tail using BT_SEttl gr4 and gr5.5 models
+14-corrEmp            ---   Correction for the missing tail performed with library stars
 
